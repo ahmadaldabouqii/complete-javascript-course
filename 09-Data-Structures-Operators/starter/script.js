@@ -151,3 +151,60 @@ const [p = 1, q = 1, r = 1] = [8, 9];
 console.log(p, q, r);
 
 */
+
+/////////////////////////  from js book  /////////////////////////
+
+let oo = { x: 1, y: 2 }; // The object we'll loop over
+for (const [name, value] of Object.entries(oo)) {
+  console.log(name, value); // Prints "x 1" and "y 2"
+}
+
+// If you want to collect all unused or remaining values into a single variable when destructuring an array
+let [x, ...y] = [1, 2, 3, 4, 5, 6, 7, 8]; // y == [2,3,4,5,6,7,8]
+console.log(x, y);
+
+let [first, ...rest] = 'Hello'; // first == "H"; rest == ["e","l","l","o"]
+console.log(first, rest);
+
+// Math object has many properties
+// If the lefthand side of this assignment had included a variable whose name was not a property of Math, that variable
+// would simply be assigned #undefined.
+// Same as const sin=Math.sin, cos=Math.cos, tan=Math.tan
+const { sin, cos, tan } = Math;
+console.log(sin, cos, tan);
+
+// destructuring an array of objects
+// An Array of two points objects
+let points = [
+  { x: 1, y: 2 },
+  { x: 3, y: 4 },
+];
+// destructured into 4 variables.
+let [{ x: x1, y: y1 }, { x: x2, y: y2 }] = points;
+console.log(x1 === 1 && y1 === 2 && x2 === 3 && y2 === 4); //true
+
+//  destructure an object of arrays
+
+let pointsObjects = { p1: [1, 2], p2: [3, 4] };
+// destructured into 4 vars
+const {
+  p1: [xx1, yy1],
+  p2: [xx2, yy2],
+} = pointsObjects;
+console.log(xx1 === 1 && yy1 === 2 && xx2 === 3 && yy2 === 4); // => true;
+
+function arraycopy({
+  from,
+  to = from,
+  n = from.length,
+  fromIndex = 0,
+  toIndex = 0,
+}) {
+  let valuesToCopy = from.slice(fromIndex, fromIndex + n);
+  to.splice(toIndex, 0, ...valuesToCopy);
+  return to;
+}
+
+let a1 = [1, 2, 3, 4, 5],
+  b1 = [9, 8, 7, 6, 5];
+console.log(arraycopy({ from: a1, n: 3, to: b1, toIndex: 4 })); // => [9, 8, 7, 6, 1, 2, 3, 5];
