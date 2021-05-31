@@ -67,7 +67,7 @@ console.log(menu, starters);
 // mutating variables
 let a = 111;
 let b = 999;
-const obj = { a: 23, b: 7, c: 14 };
+const obj = { d: 23, e: 7, f: 14 };
 ({ a, b } = obj);
 console.log(a, b);
 
