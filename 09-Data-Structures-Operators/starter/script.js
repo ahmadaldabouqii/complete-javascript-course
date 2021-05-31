@@ -30,9 +30,33 @@ const restaurant = {
       close: 24,
     },
   },
+
+  orderDelivery: function ({
+    starterIndex = 1,
+    mainIndex = 0,
+    time = '20:00',
+    address,
+  }) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
 };
 
 /////////////////////////  Destructuring Objects /////////////////////////
+
+//it's one argument(one object)!
+restaurant.orderDelivery({
+  time: '22:30',
+  address: 'Jordan.ST, 13i',
+  mainIndex: 2,
+  starterIndex: 2,
+});
+
+restaurant.orderDelivery({
+  address: 'Jordan.ST, 13i',
+  starterIndex: 2,
+});
 
 const { name, openingHours, categories } = restaurant;
 console.log(name, openingHours, categories);
@@ -69,6 +93,7 @@ const {
   fri: { open: o, close: c },
 } = openingHours;
 console.log(o, c);
+
 /*
 
 /////////////////////////  Destructuring Arrays /////////////////////////
