@@ -174,14 +174,15 @@ console.log(x, y);
 let [first, ...rest] = 'Hello'; // first == "H"; rest == ["e","l","l","o"]
 console.log(first, rest);
 
-// Math object has many properties
-// If the lefthand side of this assignment had included a variable whose name was not a property of Math, that variable
-// would simply be assigned #undefined.
-// Same as const sin=Math.sin, cos=Math.cos, tan=Math.tan
+// Math object has many properties.
+// If the lefthand side of this assignment had included a variable whose name was not a property of Math,
+//  that variable would simply be assigned #undefined.
 const { sin, cos, tan } = Math;
+// Same as const sin=Math.sin, cos=Math.cos, tan=Math.tan
 console.log(sin, cos, tan);
 
 // destructuring an array of objects
+
 // An Array of two points objects
 let points = [
   { x: 1, y: 2 },
