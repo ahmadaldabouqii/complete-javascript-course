@@ -47,8 +47,56 @@ const restaurant = {
       `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`
     );
   },
+
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 };
 
+/////////////////////////  Rest Pattern && Rest Parameter  /////////////////////////
+
+// 1) Destructuring
+
+// difference between SPREAD && REST ..
+// SPREAD, Because on RIGHT side of =
+const arrr = [1, 2, ...[3, 4]];
+
+//REST, Because on left side of =
+const [v, h, ...others] = [1, 2, 3, 4, 5];
+console.log(v, h, others);
+
+//////////////////////////////////////////////////////////
+
+// example(use SPREAD && REST ..)
+
+const [pizza, , Risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, Risotto, otherFood);
+
+//////////////////////////////////////////////////////////
+
+// REST WITH Objects
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(weekdays);
+
+// 2) Functions
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+  console.log(sum);
+};
+add(2, 3);
+add(5, 3, 7, 4);
+add(5, 3, 7, 2, 5, 9);
+
+const x11 = [23, 5, 7];
+add(...x11);
+
+restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
+restaurant.orderPizza('mushrooms');
 /////////////////////////  Spread Operator /////////////////////////
 
 const arr = [7, 8, 9];
