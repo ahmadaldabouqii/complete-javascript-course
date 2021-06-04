@@ -54,6 +54,38 @@ const restaurant = {
   },
 };
 
+/////////////////////////  Short-Circuiting  /////////////////////////
+
+console.log(`--------- OR ---------`);
+
+console.log(3 || 'Ahmad');
+console.log('' || 'Ahmad');
+console.log(true || 0);
+console.log(undefined || null);
+console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+
+restaurant.numGuests = 23;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
+console.log(restaurant);
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+console.log(`--------- AND ---------`);
+
+console.log(0 && 'Ahmad');
+console.log(7 && 'Ahmad');
+console.log('Hello' && 23 && null && 'Ahmad');
+
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('mushrooms', 'spinach');
+}
+// it's same if above,  I'm not saying that you should go ahead and replace all your if statements
+// with the AND or the OR operators, so please definitely don't do that
+// because it's gonna make your code very hard to read in the future.
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
+
 /////////////////////////  Rest Pattern && Rest Parameter  /////////////////////////
 
 // 1) Destructuring
