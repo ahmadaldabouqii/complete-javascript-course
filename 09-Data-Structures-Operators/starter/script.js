@@ -96,6 +96,26 @@ const game = {
     team2: 6.5,
   },
 };
+/////////////////////////  Looping Arrays: The for-of Loop  /////////////////////////
+
+const dobleMenu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+for (const item of dobleMenu) console.log(item);
+
+for (const item of dobleMenu.entries()) console.log(item);
+
+console.log(...dobleMenu.entries());
+
+for (const [index] of dobleMenu.entries()) console.log(index);
+
+for (const [index, value] of dobleMenu.entries()) {
+  console.log(`${index + 1}: ${value}`);
+}
+
+for (const [index, value] of dobleMenu.entries()) console.log(index, value);
+
+for (const [, value] of dobleMenu.entries()) console.log(value);
+
+/////////////////////////  Coding Challenge #1  /////////////////////////
 
 // 1).
 const [players1, players2] = game.players;
