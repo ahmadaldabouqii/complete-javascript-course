@@ -56,7 +56,7 @@ const restaurant = {
   },
 };
 
-/////////////////////////  Coding Challenge #1  /////////////////////////
+/////////////////////////  For Coding Challenge #1 & #2  /////////////////////////
 
 const game = {
   team1: 'Bayern Munich',
@@ -117,11 +117,19 @@ average /= odds.length;
 console.log(average);
 
 // 3)
-
 for (const [team, odd] of Object.entries(game.odds)) {
   const teamStr = team === 'x' ? 'draw' : `Victory ${game[team]}`;
   console.log(`Odd of ${teamStr}: ${odd}`);
 }
+
+// 4)
+const scorers = {};
+for (const player of game.scored) {
+  // scorers[player] ? scorers[player]++ : (scorers[player] = 1);
+  if (scorers[player]) scorers[player]++;
+  else scorers[player] = 1;
+}
+console.log(scorers);
 /*
 /////////////////////////  Looping Objects: Object Keys, Values, and Entries  /////////////////////////
 // Property NAMES
