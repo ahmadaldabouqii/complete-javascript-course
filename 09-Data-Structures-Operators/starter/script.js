@@ -99,6 +99,54 @@ const game = {
   },
 };
 
+/////////////////////////  Coding Challenge #2  /////////////////////////
+
+// 1)
+for (const [i, player] of game.scored.entries())
+  console.log(`Goal ${i + 1}: ${player}`);
+
+// 2)
+let sum = 0;
+for (let x of Object.values(game.odds)) sum += x;
+console.log(sum / 3);
+
+let average = 0;
+const odds = Object.values(game.odds);
+for (const odd of odds) average += odd;
+average /= odds.length;
+console.log(average);
+
+// 3)
+
+for (const [team, odd] of Object.entries(game.odds)) {
+  const teamStr = team === 'x' ? 'draw' : `Victory ${game[team]}`;
+  console.log(`Odd of ${teamStr}: ${odd}`);
+}
+/*
+/////////////////////////  Looping Objects: Object Keys, Values, and Entries  /////////////////////////
+// Property NAMES
+const properties = Object.keys(openingHours);
+// console.log(properties);
+
+let openStr = `We are open on ${properties.length} days:`;
+for (const day of properties) {
+  openStr += `${day}, `;
+}
+console.log(openStr);
+
+// Property Values
+const values = Object.values(openingHours);
+console.log(values);
+
+// Entire Object
+const entries = Object.entries(openingHours);
+console.log(entries);
+
+// [key, value]
+for (const [day, { open, close }] of entries) {
+  console.log(`On ${day} we open at ${open} and close at ${close}`);
+}
+
 /////////////////////////  Optional Chaining  /////////////////////////
 if (restaurant.openingHours && restaurant.openingHours.mon)
   console.log(restaurant.openingHours.mon.open);
@@ -423,7 +471,7 @@ console.log(i, u, t);
 const [p = 1, q = 1, r = 1] = [8, 9];
 console.log(p, q, r);
 
-*/
+
 
 /////////////////////////  from js book  /////////////////////////
 
@@ -482,3 +530,4 @@ function arraycopy({
 let a1 = [1, 2, 3, 4, 5],
   b1 = [9, 8, 7, 6, 5];
 console.log(arraycopy({ from: a1, n: 3, to: b1, toIndex: 4 })); // => [9, 8, 7, 6, 1, 2, 3, 5];
+*/
