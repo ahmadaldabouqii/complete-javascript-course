@@ -128,9 +128,7 @@ for (const [team, odd] of Object.entries(game.odds)) {
 
 const scorers = {};
 for (const player of game.scored) {
-  // scorers[player] ? scorers[player]++ : (scorers[player] = 1);
-  if (scorers[player]) scorers[player]++;
-  else scorers[player] = 1;
+  scorers[player] ? scorers[player]++ : (scorers[player] = 1);
 }
 console.log(scorers);
 
