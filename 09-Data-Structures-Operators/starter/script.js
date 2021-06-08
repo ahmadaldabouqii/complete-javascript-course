@@ -99,6 +99,39 @@ const game = {
   },
 };
 
+/////////////////////////  Maps  /////////////////////////
+const rest = new Map();
+rest.set('name', 'Classico Italiano');
+rest.set(1, 'Firenze, Italy');
+console.log(rest.set(2, 'Lisbon, Portugal'));
+
+rest
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are Open :D')
+  .set(false, 'We are Close :(');
+
+// to read data fro a map we use get method
+console.log(rest.get('name'));
+console.log(rest.get(true));
+console.log(rest.get(false));
+console.log(rest.get(1));
+
+const time = 8;
+console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+
+console.log(rest.has('categories'));
+rest.delete(2);
+// rest.clear();
+
+const arr = [1, 2];
+rest.set(arr, 'Test');
+rest.set(document.querySelector('h1'), 'Heading');
+
+console.log(rest.get(arr));
+console.log(rest);
+/*
 /////////////////////////  Sets  /////////////////////////
 const orderSet = new Set([
   'pasta',
@@ -136,7 +169,7 @@ console.log(
   new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size
 );
 console.log(new Set('ahmad_aldabouqi'));
-/*
+
 /////////////////////////  Coding Challenge #2  /////////////////////////
 
 // 1)
