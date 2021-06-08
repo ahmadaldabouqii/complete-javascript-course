@@ -99,6 +99,44 @@ const game = {
   },
 };
 
+/////////////////////////  Sets  /////////////////////////
+const orderSet = new Set([
+  'pasta',
+  'pizza',
+  'pizza',
+  'pasta',
+  'Rissoto',
+  'pizza',
+]);
+console.log(orderSet);
+
+// capital letter is defferent from smal letter
+console.log(new Set('Ahmad'));
+
+console.log(orderSet.size);
+//check if element is exisit
+console.log(orderSet.has('pizza'));
+console.log(orderSet.has('Bread'));
+
+orderSet.add('Garlic Bread');
+orderSet.add('Garlic Bread');
+// ordersSet.clear();
+console.log(orderSet);
+
+for (const order of orderSet) console.log(order);
+
+// Example
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+const staffUnique = new Set(staff);
+const staffUniqueSpread = [...new Set(staff)];
+console.log(staffUnique);
+console.log(staffUniqueSpread);
+
+console.log(
+  new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size
+);
+console.log(new Set('ahmad_aldabouqi'));
+/*
 /////////////////////////  Coding Challenge #2  /////////////////////////
 
 // 1)
@@ -132,7 +170,7 @@ for (const player of game.scored) {
 }
 console.log(scorers);
 
-/*
+
 /////////////////////////  Looping Objects: Object Keys, Values, and Entries  /////////////////////////
 // Property NAMES
 const properties = Object.keys(openingHours);
