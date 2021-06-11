@@ -99,6 +99,51 @@ const game = {
   },
 };
 
+/////////////////////////  Working With Strings - Part 1  /////////////////////////
+
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+console.log('B737'[0]);
+
+console.log(airline.length);
+console.log('B737'.length);
+
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('r'));
+console.log(airline.indexOf('Portugal'));
+console.log(airline.indexOf('portugal'));
+
+console.log(airline.slice(4));
+console.log(airline.slice(4, 7));
+console.log(airline.slice(4, 8)); // With Space
+
+console.log(airline.slice(airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+
+console.log(airline.slice(-2));
+console.log(airline.slice(1, -1));
+console.log(airline.slice(1, -2));
+
+const checkMiddleSeat = function (seat) {
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') console.log('You got the middle seat 😬');
+  else console.log('You got lucky 😎');
+};
+
+checkMiddleSeat('AHMADE');
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+console.log(new String('Ahmad'));
+console.log(typeof new String('Ahmad'));
+
+console.log(typeof new String('Ahmad').slice(1));
+
+/*
 /////////////////////////  For Coding Challenge #3  /////////////////////////
 const gameEvents = new Map([
   [17, '⚽ GOAL'],
@@ -138,7 +183,7 @@ for (const [min, event] of gameEvents) {
   const half = min <= 45 ? 'FIRST' : 'SECOND';
   console.log(`[${half} HALF] ${min}: ${event}`);
 }
-/*
+
 /////////////////////////  Maps: Iteration  /////////////////////////
 const question = new Map([
   ['question', 'What is the best programming language in the world?'],
