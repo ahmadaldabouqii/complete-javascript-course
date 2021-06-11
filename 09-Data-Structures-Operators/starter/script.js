@@ -99,6 +99,26 @@ const game = {
   },
 };
 
+/////////////////////////  Coding Challenge #4  /////////////////////////
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const rows = text.split('\n');
+
+  for (const [i, row] of rows.entries()) {
+    const [first, second] = row.toLowerCase().trim().split('_');
+    const output = `${first}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`;
+    console.log(`${output.padEnd(20)}${'✅'.repeat(i + 1)}`);
+  }
+});
+
+/*
 /////////////////////////  Working With Strings - Part 3  /////////////////////////
 // Split and join
 console.log('a+very+nice+string'.split('+'));
@@ -150,7 +170,7 @@ planesInLine(5);
 planesInLine(3);
 planesInLine(12);
 
-/*
+
 /////////////////////////  Working With Strings - Part 2  /////////////////////////
 
 const airline = 'TAP Air Portugal';
@@ -258,7 +278,7 @@ console.log(typeof new String('Ahmad'));
 console.log(typeof new String('Ahmad').slice(1));
 
 
-/////////////////////////  For Coding Challenge #3  /////////////////////////
+/////////////////////////  Coding Challenge #3  /////////////////////////
 const gameEvents = new Map([
   [17, '⚽ GOAL'],
   [36, '🔁 Substitution'],
