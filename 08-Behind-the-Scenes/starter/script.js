@@ -87,17 +87,24 @@ console.log(z === window.z);
 */
 
 //////////////////////////////    this keyword in Practice    //////////////////////////////
-console.log(this);
+console.log(this); //Window
 
 const calcAge = function (birthYear) {
   console.log(2037 - birthYear);
   console.log(this);
+  // => undefined; because we are in strict mode. Remember that in sloppy mode,it would be also the global object(window object).
+  // So in this normal function it's get own this keywords.
 };
 calcAge(1991);
 
 const calcAgeArrow = birthYear => {
   console.log(2037 - birthYear);
   console.log(this);
+  // => Window; because the arrow function does not get its own this keyword.
+  // So instead the arrow function simply uses the lexical this keyword, which means that it uses the this keyword of its parent function or of its parents scope.
+  // in this case, what is the lexical, this keyword? So what is the this keywords in the parent's scope of this function?
+  // Well, it is window because window is the this keywords here in the global scope.
+  // So in this case, this, this keyword here will simply point to the this keyword in the global scope.And so therefore it will point to window.
 };
 calcAgeArrow(1980);
 
@@ -105,6 +112,8 @@ const jonas = {
   year: 1991,
   calcAge: function () {
     console.log(this);
+    // when we have a method call, the this keyword inside of the method will be the object that is calling the method.
+    // And in this case, that's the Jonas object, So Jonas here is basically the owner of the method.
     console.log(2037 - this.year);
   },
 };
@@ -114,7 +123,7 @@ const matilda = {
   year: 2017,
 };
 
-matilda.calcAge = jonas.calcAge;
+matilda.calcAge = jonas.calcAge; // we simply copy the calcAge method from Jonah's to Matilda.(method borrowing).
 matilda.calcAge();
 
 const f = jonas.calcAge;
