@@ -1,6 +1,6 @@
 'use strict';
 
-/* 
+/*
 //////////////////////////////    Scoping in Practice    //////////////////////////////
 
 function calcAge(birthYear) {
@@ -84,7 +84,7 @@ const z = 3;
 console.log(x === window.x);
 console.log(y === window.y);
 console.log(z === window.z);
-*/
+
 
 //////////////////////////////    this keyword in Practice    //////////////////////////////
 console.log(this); //Window
@@ -128,3 +128,53 @@ matilda.calcAge();
 
 const f = jonas.calcAge;
 f();
+*/
+
+//////////////////////////////    Regular Functions vs. Arrow Functions    //////////////////////////////
+
+// var firstName = 'Matilda';
+
+const jonas = {
+  firstName: 'Ahmad',
+  year: 1991,
+  calcAge: function () {
+    // console.log(this);
+    console.log(2037 - this.year);
+
+    // solution 1
+    // const self = this; // self OR that
+    // const isMillenial = function () {
+    //   console.log(self);
+    //   console.log(self.year >= 1981 && self.year <= 1996);
+    // };
+
+    // Solution 2
+    const isMillenial = () => {
+      console.log(this);
+      console.log(this.year >= 1981 && this.year <= 1996);
+    };
+    isMillenial();
+  },
+
+  greet: () => console.log(`Hey ${this.firstName}`),
+};
+
+jonas.greet();
+// hey undefined => because arrow function does not get its own this keyword, it will simply use the this keyword from its surroundings.
+// So in other words, its parents this keyword, and the parent scope of this greet method is the global scope.
+
+jonas.calcAge();
+
+// arguments keyword
+const addExpr = function (a, b) {
+  console.log(arguments); // it's just allowed in regular Function
+  return a + b;
+};
+addExpr(2, 5);
+addExpr(2, 5, 7, 9);
+
+var addArrow = (a, b) => {
+  console.log(arguments); // error
+  return a + b;
+};
+addArrow(2, 5);
