@@ -207,7 +207,11 @@ const addTaxRate = function (rate) {
     return value + value * rate;
   };
 };
-
 const addVat2 = addTaxRate(0.23);
 console.log(addVat2(100));
 console.log(addVat2(23));
+
+const addTaxRateArr = rate => value => value + value * rate;
+const addVatArrow = addTaxRateArr(0.23);
+console.log(addVatArrow(100));
+console.log(addVatArrow(23));
