@@ -164,3 +164,50 @@ book.apply(swiss, flightData);
 console.log(swiss);
 
 book.call(swiss, ...flightData);
+
+/////////////////////////  The bind Method  /////////////////////////
+
+// it allows us to manually set this keywords for any function call.
+// Now, the difference is that bind does not immediately call the function.
+// Instead it returns a new function where this keyword is bound.
+
+const bookEW = book.bind(eurowings);
+const bookLH = book.bind(lufthansa);
+const bookLX = book.bind(swiss);
+bookEW(857, 'Natheer Almahameed');
+
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('Mohammad Salah');
+bookEW23('Leo Messi');
+
+// with Event Liteners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
+
+  this.planes++;
+  console.log(this.planes);
+};
+
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// Partial Application
+const addTax = (rate, value) => value + value * rate;
+
+const addVat = addTax.bind(null, 0.23);
+// addVat = value => value + value * 0.23;
+console.log(addVat(100));
+console.log(addVat(23));
+
+//Challenge
+const addTaxRate = function (rate) {
+  return function (value) {
+    return value + value * rate;
+  };
+};
+
+const addVat2 = addTaxRate(0.23);
+console.log(addVat2(100));
+console.log(addVat2(23));
