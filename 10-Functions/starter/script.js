@@ -215,7 +215,7 @@ const addTaxRateArr = rate => value => value + value * rate;
 const addVatArrow = addTaxRateArr(0.23);
 console.log(addVatArrow(100));
 console.log(addVatArrow(23));
-*/
+
 
 /////////////////////////  Coding Challenge #1  /////////////////////////
 // Let's build a simple poll app!
@@ -312,3 +312,20 @@ runOnce();
 }
 // console.log(isPrivate);
 console.log(notPrivate);
+*/
+
+/////////////////////////  Closures  /////////////////////////
+
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking();
+booker();
+booker();
+booker();
