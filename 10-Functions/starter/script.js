@@ -371,3 +371,14 @@ const boardPassengers = function (n, wait) {
 
 const perGroup = 1000;
 boardPassengers(180, 3);
+
+/////////////////////////  Coding Challenge #2  /////////////////////////
+
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+
+  header.addEventListener('click', () => {
+    header.style.color = 'blue';
+  });
+})();
