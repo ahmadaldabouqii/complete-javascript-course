@@ -77,6 +77,7 @@ const displayMovements = function (movements) {
   });
 };
 displayMovements(account1.movements);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -168,3 +169,22 @@ currenciesUnique.forEach(function (value, _, set) {
   console.log(`${value}: ${value}`);
 });
 */
+
+/////////////////////////////////////////////////   Coding Challenge #1   /////////////////////////////////////////////////
+
+// a shallow copy is a copy in which if we make any changes
+// then in the original also the changes will get reflected,usually in case of objects.
+
+const checkDogs = function (dogsJulia, dogsKate) {
+  const CatsJulia = dogsJulia.slice(1, -2);
+  const dogs = [...CatsJulia, ...dogsKate];
+  dogs.forEach(function (dog, i) {
+    dog >= 3
+      ? console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`)
+      : console.log(`Dog number ${i + 1}  is still a puppy🐶`);
+  });
+};
+
+checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+console.log('===============================================================');
+checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
