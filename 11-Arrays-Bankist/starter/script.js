@@ -168,7 +168,7 @@ console.log(currenciesUnique);
 currenciesUnique.forEach(function (value, _, set) {
   console.log(`${value}: ${value}`);
 });
-*/
+
 
 /////////////////////////////////////////////////   Coding Challenge #1   /////////////////////////////////////////////////
 
@@ -188,3 +188,29 @@ const checkDogs = function (dogsJulia, dogsKate) {
 checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
 console.log('===============================================================');
 checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+*/
+
+/////////////////////////////////////////////////   148. The map Method   /////////////////////////////////////////////////
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const euroToUsd = 1.1;
+// const movementsUSD = movements.map(function (mov) {
+//   return mov * euroToUsd;
+// });
+const movementsUSD = movements.map(mov => mov * euroToUsd);
+console.log(movements);
+console.log(movementsUSD);
+
+const movementsUSDForOf = [];
+for (const mov of movements) {
+  movementsUSDForOf.push(mov * euroToUsd);
+}
+console.log(movementsUSDForOf);
+
+const movementsDescriptions = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+      mov
+    )}`
+);
+console.log(movementsDescriptions);
