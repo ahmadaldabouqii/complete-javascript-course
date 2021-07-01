@@ -309,7 +309,6 @@ const totalDepositesUSD = movements
   .map(mov => mov * euroToUsd)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(totalDepositesUSD);
-*/
 
 /////////////////////////////////////////////////  Coding Challenge #3   /////////////////////////////////////////////////
 
@@ -322,3 +321,16 @@ const calcAverageHumanAge = ages =>
 const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 console.log(avg1, avg2);
+*/
+/////////////////////////////////////////////////  155. The find Method   /////////////////////////////////////////////////
+
+const firstWithdrawal = movements.find(mov => mov < 0);
+console.log(movements);
+console.log(firstWithdrawal);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
+
+for (const acc of accounts) {
+  if (acc.owner === 'Jessica Davis') console.log(acc);
+}
