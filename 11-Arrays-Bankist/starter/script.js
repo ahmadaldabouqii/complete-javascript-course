@@ -4,7 +4,7 @@
 /////////////////////////////////////////////////
 // BANKIST APP
 
-// Data
+// Data (Assuming data comes from web API which are nothing but objects)
 const account1 = {
   owner: 'Jonas Schmedtmann',
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
@@ -424,7 +424,7 @@ console.log(account);
 for (const acc of accounts) {
   if (acc.owner === 'Jessica Davis') console.log(acc);
 }
-*/
+
 /////////////////////////////////////////////////  159. some and every   /////////////////////////////////////////////////
 
 // Some METHOD
@@ -449,3 +449,28 @@ const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.filter(deposit));
 console.log(movements.every(deposit));
+*/
+
+/////////////////////////////////////////////////  160. flat and flatMap   /////////////////////////////////////////////////
+
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat()); // default level deep is 1 (goes 1 level deep)
+
+const arrDeep = [[[1, 2], 3], [[4, 5], 6], 7, 8];
+console.log(arrDeep.flat(2)); // like this, goes 2 level deepth
+
+// flat
+const overallBalnace = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(overallBalnace);
+
+// flatMap > only geos one level deep and we cannot change it
+
+const overallBalnace2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(overallBalnace2);
