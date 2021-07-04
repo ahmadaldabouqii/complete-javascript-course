@@ -172,7 +172,17 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
-btnClose.addEventListener('click', function () {
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    currentAccount.movements.push(amount);
+    updateUI(currentAccount);
+  }
+});
+
+btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
   if (
@@ -183,7 +193,7 @@ btnClose.addEventListener('click', function () {
       acc => acc.username === currentAccount.username
     );
 
-    // Delete Account
+    // Delete account
     accounts.splice(index, 1);
 
     // Hide UI
@@ -191,6 +201,7 @@ btnClose.addEventListener('click', function () {
   }
 
   inputCloseUsername.value = inputClosePin.value = '';
+  labelWelcome.textContent = 'Log in to get started';
 });
 
 /////////////////////////////////////////////////
@@ -198,6 +209,7 @@ btnClose.addEventListener('click', function () {
 // LECTURES
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
 /*
 /////////////////////////////////////////////////   141. Simple Array Methods   /////////////////////////////////////////////////
 
@@ -413,4 +425,27 @@ for (const acc of accounts) {
   if (acc.owner === 'Jessica Davis') console.log(acc);
 }
 */
-/////////////////////////////////////////////////  156. Implementing Login   /////////////////////////////////////////////////
+/////////////////////////////////////////////////  159. some and every   /////////////////////////////////////////////////
+
+// Some METHOD
+console.log(movements);
+
+// Checks/test for QUALITY
+console.log(movements.includes(-130));
+
+// Checks for condition
+console.log(movements.some(mov => mov === -130));
+
+const anyDeposits = movements.some(mov => mov > 0);
+console.log(anyDeposits);
+
+// Every METHOD
+console.log(movements.every(mov => mov > 0));
+console.log(account4.movements.every(mov => mov > 0));
+
+// Separate CallBack
+
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.filter(deposit));
+console.log(movements.every(deposit));
