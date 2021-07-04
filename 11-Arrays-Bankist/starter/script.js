@@ -72,7 +72,6 @@ const displayMovements = function (movements) {
         <div class="movements__value">${mov}€</div>
       </div>
     `;
-
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
@@ -126,7 +125,6 @@ let currentAccount;
 btnLogin.addEventListener('click', function (e) {
   // prevent form from submitting
   e.preventDefault();
-
   currentAccount = accounts.find(
     acc => acc.username === inputLoginUsername.value
   );
@@ -202,6 +200,23 @@ btnClose.addEventListener('click', function (e) {
 
   inputCloseUsername.value = inputClosePin.value = '';
   labelWelcome.textContent = 'Log in to get started';
+});
+
+let timesClicked = 0;
+
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  timesClicked++;
+  if (timesClicked % 2 == 0) {
+    //Sorting
+    currentAccount.movements.sort((a, b) => a - b);
+  } else {
+    currentAccount.movements.sort((a, b) => b - a);
+  }
+
+  //Update UI
+  updateUI(currentAccount);
 });
 
 /////////////////////////////////////////////////
@@ -449,7 +464,6 @@ const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.filter(deposit));
 console.log(movements.every(deposit));
-*/
 
 /////////////////////////////////////////////////  160. flat and flatMap   /////////////////////////////////////////////////
 
@@ -474,3 +488,46 @@ const overallBalnace2 = accounts
   .reduce((acc, mov) => acc + mov, 0);
 
 console.log(overallBalnace2);
+*/
+
+/////////////////////////////////////////////////  161. Sorting Arrays   /////////////////////////////////////////////////
+
+// Strings
+const owners = ['Ahmad', 'Jonas', 'Zack', 'Adam', 'Mohammad'];
+console.log(owners.sort());
+console.log(owners); // Original array was mutates
+
+// Numbers : by passing compare callback function into the sort method
+console.log(movements);
+
+// a = currentValue , b = nextValue. if we imagine the sort method looping over the array.
+// return < 0, a will be sorted before b (keep order)
+// return > 0, b will be sorted before a (switch order)
+
+// Ascending
+// step 1
+
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+
+// step 2
+movements.sort((a, b) => a - b);
+
+console.log(movements);
+
+////////
+
+// Descending
+// step 1
+
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+
+// step 2
+movements.sort((a, b) => b - a);
+
+console.log(movements);
