@@ -555,10 +555,14 @@ arr.fill(23, 2, 6);
 console.log(arr);
 
 // Array.from
-// What if we want to create an array programmatically ? we use:
+// What if we want to create an array programmatically ? we use Array.from():
+// Array.from(arrayLike, (element, index, array) => { ... } )
+// Array.from(arrayLike, mapFn, thisArg)
+// Array.from(arrayLike, function mapFn(element, index, array) { ... }, thisArg)
 
 // notes that we're not using the from() as a method on an array, Instead we are using it on the Array() constructor.
 // so again, Array() is a function and then on this function object, we call the from() method.
+
 const y = Array.from({ length: 7 }, () => 1);
 console.log(y);
 
@@ -573,3 +577,31 @@ labelBalance.addEventListener('click', () => {
   );
   console.log(movementsUI);
 });
+
+//// ex from MDN ////
+console.log(Array.from('foo'));
+
+const set = new Set(['foo', 'bar', 'baz', 'foo']);
+console.log(Array.from(set));
+
+const map = new Map([
+  [1, 2],
+  [2, 4],
+  [4, 8],
+]);
+console.log(Array.from(map));
+
+const mapper = new Map([
+  ['1', 'a'],
+  ['2', 'b'],
+]);
+console.log(Array.from(mapper.values()));
+console.log(Array.from(mapper.keys()));
+
+// Array from an Array-like object (arguments)
+function f() {
+  return Array.from(arguments);
+}
+
+console.log(f(1, 2, 3));
+console.log(f('Ahmad'));
