@@ -604,7 +604,7 @@ function f() {
 
 console.log(f(1, 2, 3));
 console.log(f('Ahmad'));
-*/
+
 /////////////////////////////////////////////////  164. Array Methods Practice   /////////////////////////////////////////////////
 
 // ex:1
@@ -740,3 +740,65 @@ console.log(
     'and here is another title with an EXAMPLE and it is so nice!'
   )
 );
+*/
+
+/////////////////////////////////////////////////  Coding Challenge #2   /////////////////////////////////////////////////
+
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+];
+
+// 1.
+dogs.forEach(dog => (dog.recFood = Math.trunc(dog.weight ** 0.75 * 28)));
+
+// 2.
+const dogSarah = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(dogSarah);
+console.log(
+  `Sarah's dog is eating too ${
+    dogSarah.curFood > dogSarah.recFood ? 'much' : 'little'
+  } `
+);
+
+// 3.
+const ownersEatTooMuch = dogs
+  .filter(dog => dog.curFood > dog.recFood)
+  .flatMap(dog => dog.owners);
+console.log(ownersEatTooMuch);
+
+const ownersEatTooLittle = dogs
+  .filter(dog => dog.curFood < dog.recFood)
+  .flatMap(dog => dog.owners);
+console.log(ownersEatTooLittle);
+
+// 4.
+console.log(`${ownersEatTooMuch.join(' and ')} dogs eat too much!`);
+console.log(`${ownersEatTooLittle.join(' and ')} dogs eat too little!`);
+
+// 5.
+console.log(dogs.some(dog => dog.curFood === dog.recFood));
+
+// 6.
+// currentFood > (recommendedFood * 0.90) && currentFood < (recommendedFood * 1.10)
+const checkEatingOkay = dog =>
+  dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1;
+
+console.log(dogs.some(checkEatingOkay));
+
+// 7.
+console.log(dogs.filter(checkEatingOkay));
+
+// 8.
+// sort it by recommended food portion in an ascending order [1,2,3]
+
+const dogsSorted_1 = dogs.sort((dog_a, dog_b) => dog_a.recFood - dog_b.recFood);
+console.log(dogsSorted_1);
+
+const dogsSorted = dogs.slice().sort((a, b) => a.recFood - b.recFood);
+console.log(dogsSorted);
+
+console.log(dogs.slice());
+console.log(dogs);
