@@ -488,7 +488,7 @@ const overallBalnace2 = accounts
   .reduce((acc, mov) => acc + mov, 0);
 
 console.log(overallBalnace2);
-*/
+
 
 /////////////////////////////////////////////////  161. Sorting Arrays   /////////////////////////////////////////////////
 
@@ -531,3 +531,45 @@ console.log(movements);
 movements.sort((a, b) => b - a);
 
 console.log(movements);
+
+*/
+/////////////////////////////////////////////////  162. More Ways of Creating and Filling Arrays   /////////////////////////////////////////////////
+
+const arr = [1, 2, 3, 4, 5, 6, 7];
+
+// Empty arrays + fill method
+const x = new Array(7);
+console.log(x);
+
+// console.log(x.map(() => 5)); it doesn't work
+
+x.fill(1);
+
+x.fill(1, 3);
+console.log(x);
+
+x.fill(1, 3, 5);
+console.log(x);
+
+arr.fill(23, 2, 6);
+console.log(arr);
+
+// Array.from
+// What if we want to create an array programmatically ? we use:
+
+// notes that we're not using the from() as a method on an array, Instead we are using it on the Array() constructor.
+// so again, Array() is a function and then on this function object, we call the from() method.
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z);
+
+labelBalance.addEventListener('click', () => {
+  // const movementsUI = [...document.querySelectorAll('.movements__value')];
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log(movementsUI);
+});
