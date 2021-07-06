@@ -8,13 +8,12 @@
 // Data
 
 // DIFFERENT DATA! Contains movement dates, currency and locale
-
+// Data (Assuming data comes from web API which are nothing but objects)
 const account1 = {
   owner: 'Jonas Schmedtmann',
-  movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
+  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
-
   movementsDates: [
     '2019-11-18T21:31:17.178Z',
     '2019-12-23T07:42:02.383Z',
@@ -34,7 +33,6 @@ const account2 = {
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 2222,
-
   movementsDates: [
     '2019-11-01T13:15:33.035Z',
     '2019-11-30T09:48:16.867Z',
@@ -49,9 +47,22 @@ const account2 = {
   locale: 'en-US',
 };
 
-const accounts = [account1, account2];
+const account3 = {
+  owner: 'Steven Thomas Williams',
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
+  interestRate: 0.7,
+  pin: 3333,
+};
 
-/////////////////////////////////////////////////
+const account4 = {
+  owner: 'Sarah Smith',
+  movements: [430, 1000, 700, 50, 90],
+  interestRate: 1,
+  pin: 4444,
+};
+
+const accounts = [account1, account2, account3, account4];
+
 // Elements
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
@@ -78,26 +89,17 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-/////////////////////////////////////////////////
-// Functions
-
-const displayMovements = function (movements, sort = false) {
+const displayMovements = function (movements) {
   containerMovements.innerHTML = '';
-
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
-
-  movs.forEach(function (mov, i) {
+  movements.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
-
     const html = `
       <div class="movements__row">
-        <div class="movements__type movements__type--${type}">${
-      i + 1
-    } ${type}</div>
+        <div class="movements__type movements__type--${type}">
+        ${i + 1} ${type}</div>
         <div class="movements__value">${mov}€</div>
       </div>
     `;
-
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
@@ -121,15 +123,12 @@ const calcDisplaySummary = function (acc) {
   const interest = acc.movements
     .filter(mov => mov > 0)
     .map(deposit => (deposit * acc.interestRate) / 100)
-    .filter((int, i, arr) => {
-      // console.log(arr);
-      return int >= 1;
-    })
-    .reduce((acc, int) => acc + int, 0);
+    .filter(interest => interest >= 1)
+    .reduce((acc, interest) => acc + interest, 0);
   labelSumInterest.textContent = `${interest}€`;
 };
 
-const createUsernames = function (accs) {
+const createUserNames = function (accs) {
   accs.forEach(function (acc) {
     acc.username = acc.owner
       .toLowerCase()
@@ -138,84 +137,75 @@ const createUsernames = function (accs) {
       .join('');
   });
 };
-createUsernames(accounts);
+createUserNames(accounts);
 
 const updateUI = function (acc) {
-  // Display movements
+  // display movements
   displayMovements(acc.movements);
-
-  // Display balance
+  // display balance
   calcDisplayBalance(acc);
-
-  // Display summary
+  // display summary
   calcDisplaySummary(acc);
 };
 
-///////////////////////////////////////
-// Event handlers
+// Event Handler
 let currentAccount;
-
 btnLogin.addEventListener('click', function (e) {
-  // Prevent form from submitting
+  // prevent form from submitting
   e.preventDefault();
-
   currentAccount = accounts.find(
     acc => acc.username === inputLoginUsername.value
   );
-  console.log(currentAccount);
 
-  if (currentAccount?.pin === Number(inputLoginPin.value)) {
-    // Display UI and message
-    labelWelcome.textContent = `Welcome back, ${
+  if (currentAccount?.pin === +inputLoginPin.value) {
+    // display UI and wlc message
+    labelWelcome.textContent = `Welcome Back, ${
       currentAccount.owner.split(' ')[0]
     }`;
     containerApp.style.opacity = 100;
 
-    // Clear input fields
+    // Clear the input Fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
-    // Update UI
+    // update UI
     updateUI(currentAccount);
   }
 });
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = Number(inputTransferAmount.value);
-  const receiverAcc = accounts.find(
+  const amount = +inputTransferAmount.value;
+  const receiverAccount = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
+
   inputTransferAmount.value = inputTransferTo.value = '';
+  inputTransferAmount.blur();
 
   if (
     amount > 0 &&
-    receiverAcc &&
+    receiverAccount &&
     currentAccount.balance >= amount &&
-    receiverAcc?.username !== currentAccount.username
+    receiverAccount?.username !== currentAccount.username
   ) {
     // Doing the transfer
     currentAccount.movements.push(-amount);
-    receiverAcc.movements.push(amount);
+    receiverAccount.movements.push(amount);
 
-    // Update UI
+    // update UI
     updateUI(currentAccount);
   }
 });
 
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
-
-  const amount = Number(inputLoanAmount.value);
+  const amount = +inputLoanAmount.value;
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add movement
     currentAccount.movements.push(amount);
-
-    // Update UI
     updateUI(currentAccount);
   }
-  inputLoanAmount.value = '';
 });
 
 btnClose.addEventListener('click', function (e) {
@@ -223,13 +213,11 @@ btnClose.addEventListener('click', function (e) {
 
   if (
     inputCloseUsername.value === currentAccount.username &&
-    Number(inputClosePin.value) === currentAccount.pin
+    +inputClosePin.value === currentAccount.pin
   ) {
     const index = accounts.findIndex(
       acc => acc.username === currentAccount.username
     );
-    console.log(index);
-    // .indexOf(23)
 
     // Delete account
     accounts.splice(index, 1);
@@ -239,15 +227,74 @@ btnClose.addEventListener('click', function (e) {
   }
 
   inputCloseUsername.value = inputClosePin.value = '';
+  labelWelcome.textContent = 'Log in to get started';
 });
 
-let sorted = false;
+let timesClicked = 0;
+
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
-  displayMovements(currentAccount.movements, !sorted);
-  sorted = !sorted;
+
+  timesClicked++;
+  if (timesClicked % 2 == 0) {
+    //Sorting
+    currentAccount.movements.sort((a, b) => a - b);
+  } else {
+    currentAccount.movements.sort((a, b) => b - a);
+  }
+
+  //Update UI
+  updateUI(currentAccount);
 });
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+///////////////////////////    168. Converting and Checking Numbers    ///////////////////////////
+/* 
+=> numbers in JavaScript:
+1. all numbers are represented internally as floating point numbers.
+   So basically, always as decimals, no matter if we actually write them as integers or as decimals.
+   And that's the reason why we only have one data type for all numbers.
+ex:
+*/
+console.log(23 === 23.0); // true
+
+/*
+2. numbers are represented internally in a 64 base 2 format (that means numbers are always stored in a binary format (0,1)).
+   Base 10 > are the number from 0 to 9 
+   Base 2  > are the number 0 and 1 
+*/
+
+// convert String to Number
+console.log(Number('23'));
+// when JS see +operator it will do "Type coercion"
+console.log(+23);
+
+// Parsing, it's Like a little bit type coercion bet even more advanced.
+// parseInt Method accepts a second argument which is 'redix': which is is the base of the numeral system that we are using(Base 10).
+console.log(Number.parseInt('30px', 10));
+console.log(Number.parseInt('xp30', 10)); // NAN
+
+console.log(Number.parseInt(' 2.5rem '));
+console.log(Number.parseFloat(' 2.5rem'));
+
+console.log(parseFloat(' 2.5rem'));
+
+console.log(Number.isNaN(20));
+console.log(Number.isNaN('20')); // because '20' isn't also Not a Number, it's just a regular value
+console.log(Number.isNaN(+'X20'));
+console.log(Number.isNaN(+'20X'));
+console.log(Number.isNaN(23 / 0));
+
+// Best Wat for Chicking if value is number
+console.log(Number.isFinite(20));
+console.log(Number.isFinite('20'));
+console.log(Number.isFinite(+'20X'));
+console.log(Number.isFinite(+'X20'));
+console.log(Number.isFinite(23 / 0));
+
+console.log(Number.isInteger(23));
+console.log(Number.isInteger(23.0));
+console.log(Number.isInteger(23 / 0));
