@@ -261,14 +261,16 @@ btnLoan.addEventListener('click', function (e) {
   const amount = Math.floor(inputLoanAmount.value);
   inputLoanAmount.value = '';
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add Movement
-    currentAccount.movements.push(amount);
+    setTimeout(() => {
+      // Add Movement
+      currentAccount.movements.push(amount);
 
-    // Add Loan Date
-    currentAccount.movementsDates.push(new Date().toISOString());
+      // Add Loan Date
+      currentAccount.movementsDates.push(new Date().toISOString());
 
-    // UpdateUI
-    updateUI(currentAccount);
+      // UpdateUI
+      updateUI(currentAccount);
+    }, 2500);
   }
 });
 
@@ -514,3 +516,34 @@ console.log(+future);
 ///////////////////////////    175. Internationalizing Dates (Intl)    ///////////////////////////
 
 */
+// setTimeout: simply schedules a function to run after a certain amount of time
+setTimeout(
+  (ing1, ing2) => console.log(`Here is Your Pizza with ${ing1} and ${ing2} 🍕`),
+  3000,
+  'olives',
+  'spinach'
+);
+'d'.pa;
+const ingredients = ['olives', 'spinach'];
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => console.log(`Here is Your Pizza with ${ing1} and ${ing2} 🍕`),
+  3000,
+  ...ingredients
+);
+if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);
+
+// setInterval
+1;
+setInterval(() => {
+  console.log(
+    `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()} H:M:S`
+  );
+}, 3000);
+
+setInterval(() => {
+  console.log(
+    Intl.DateTimeFormat(navigator.locale, { timeStyle: 'medium' }).format(
+      new Date()
+    )
+  );
+}, 1000);
