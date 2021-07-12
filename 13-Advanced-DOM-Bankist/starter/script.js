@@ -46,6 +46,8 @@ console.log(allButton);
 
 console.log(document.getElementsByClassName('btn'));
 
+///////////////////    183. Selecting, Creating, and Deleting Elements    ///////////////////
+
 // Creating and inserting Elements
 // .insertAdjacentHTML()
 
