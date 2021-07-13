@@ -30,7 +30,9 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-// Selectig Elements
+/////////////////// 183. Selecting, Creating, and Deleting Elements ///////////////////
+
+// Selecting elements
 console.log(document.documentElement);
 console.log(document.head);
 console.log(document.body);
@@ -40,22 +42,17 @@ const allSections = document.querySelectorAll('.section');
 console.log(allSections);
 
 document.getElementById('section--1');
-
-const allButton = document.getElementsByTagName('button');
-console.log(allButton);
+const allButtons = document.getElementsByTagName('button');
+console.log(allButtons);
 
 console.log(document.getElementsByClassName('btn'));
 
-///////////////////    183. Selecting, Creating, and Deleting Elements    ///////////////////
-
-// Creating and inserting Elements
-// .insertAdjacentHTML()
-
+// Creating and inserting elements
 const message = document.createElement('div');
-message.classList.add('.cookie-message');
-// message.textContent = 'we use cookies for improved functionality and analytics.';
+message.classList.add('cookie-message');
+// message.textContent = 'We use cookied for improved functionality and analytics.';
 message.innerHTML =
-  'we use cookies for improved functionality and analytics. <button class="btn btn--close-cookie">Got it </button>';
+  'We use cookied for improved functionality and analytics. <button class="btn btn--close-cookie">Got it!</button>';
 
 // header.prepend(message);
 header.append(message);
@@ -64,11 +61,60 @@ header.append(message);
 // header.before(message);
 // header.after(message);
 
-// Delete Elements
-
+// Delete elements
 document
   .querySelector('.btn--close-cookie')
   .addEventListener('click', function () {
     // message.remove();
     message.parentElement.removeChild(message);
   });
+
+/////////////////// 184. Styles,  Attributes and Classes ///////////////////
+
+// Styles
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+
+console.log(message.style.color);
+console.log(message.style.backgroundColor);
+
+console.log(getComputedStyle(message).color);
+console.log(getComputedStyle(message).height);
+
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+
+// CSS Custom Property (CSS Variables)
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+// Attributes
+const logo = document.querySelector('.nav__logo');
+console.log(logo.src);
+console.log(logo.alt);
+console.log(logo.className);
+
+// undefined because this is not a standard property that is expected to be an img
+console.log(logo.designer);
+logo.setAttribute('company', 'Bankist');
+console.log(logo.getAttribute('designer'));
+
+console.log(logo.src);
+console.log(logo.getAttribute('src'));
+
+const link = document.querySelector('.nav__link--btn');
+console.log(link.href);
+console.log(link.getAttribute('href'));
+
+// data attributes: a special kind of attributes that start with the words data.
+// syntax: data-whateverYouWant
+// we use data attributes when we work with the UI and especially when we need to store data in user interface, so basically in the HTML code.
+console.log(logo.dataset.versionNumber);
+
+// Classes
+logo.classList.add('c', 'j');
+logo.classList.remove('c', 'j');
+logo.classList.toggle('c');
+logo.classList.contains('c'); // not includes
+
+// Don't use this because this will override all the existing classes and also it allows us to only put one class on any element.
+logo.clasName = 'jonas';
