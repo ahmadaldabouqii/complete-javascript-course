@@ -7,6 +7,15 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+const nav = document.querySelector('.nav');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+///////////////////////////////////////
+// Modal window
 
 const openModal = function (e) {
   e.preventDefault();
@@ -29,6 +38,61 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+///////////////////////////////////////
+// Button scrolling
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+
+  console.log(e.target.getBoundingClientRect());
+
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  // Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+///////////////////////////////////////
+// Page navigation
+
+// document.querySelectorAll('.nav__link').forEach(el => {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute('href');
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
+
+// 1. Add event listener to common parent element
+// 2. Determine what element originated the event.
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+  // Mathching strategy
+  // if (e.target.matches('.nav__link')) console.log('LINK');
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
 /*
 /////////////////// 183. Selecting, Creating, and Deleting Elements ///////////////////
 
@@ -118,38 +182,38 @@ logo.classList.contains('c'); // not includes
 
 // Don't use this because this will override all the existing classes and also it allows us to only put one class on any element.
 logo.clasName = 'jonas';
-*/
 
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section_1 = document.querySelector('#section--1');
 
-btnScrollTo.addEventListener('click', function (e) {
-  const s1_coords = section_1.getBoundingClientRect();
-  console.log(s1_coords);
-  console.log(e.target.getBoundingClientRect());
-  console.log('current position (X/Y)', window.pageXOffset, window.pageYOffset);
-  console.log(
-    'height/width viewport',
-    document.documentElement.clientHeight,
-    document.documentElement.clientWidth
-  );
+// const btnScrollTo = document.querySelector('.btn--scroll-to');
+// const section_1 = document.querySelector('#section--1');
 
-  // Scrolling
-  // window.scrollTo(
-  //   s1_coords.left + window.pageXOffset,
-  //   s1_coords.top + window.pageYOffset
-  // );
+// btnScrollTo.addEventListener('click', function (e) {
+//   const s1_coords = section_1.getBoundingClientRect();
+//   console.log(s1_coords);
+//   console.log(e.target.getBoundingClientRect());
+//   console.log('current position (X/Y)', window.pageXOffset, window.pageYOffset);
+//   console.log(
+//     'height/width viewport',
+//     document.documentElement.clientHeight,
+//     document.documentElement.clientWidth
+//   );
 
-  // old way
-  // window.scrollTo({
-  //   left: s1_coords.left + window.pageXOffset,
-  //   top: s1_coords.top + window.pageYOffset,
-  //   behavior: 'smooth',
-  // });
+//   // Scrolling
+//   // window.scrollTo(
+//   //   s1_coords.left + window.pageXOffset,
+//   //   s1_coords.top + window.pageYOffset
+//   // );
 
-  // modern way
-  section_1.scrollIntoView({ behavior: 'smooth' });
-});
+//   // old way
+//   // window.scrollTo({
+//   //   left: s1_coords.left + window.pageXOffset,
+//   //   top: s1_coords.top + window.pageYOffset,
+//   //   behavior: 'smooth',
+//   // });
+
+//   // modern way
+//   section_1.scrollIntoView({ behavior: 'smooth' });
+// });
 
 const h1 = document.querySelector('h1');
 const alertH1 = function () {
@@ -189,3 +253,4 @@ document.querySelector('.nav').addEventListener('click', function (e) {
   this.style.backgroundColor = randomColor();
   console.log('NAV', e.target, e.currentTarget);
 });
+*/
