@@ -116,21 +116,45 @@ tabsContainer.addEventListener('click', e => {
 
 // Menu fade animation
 
-const handleHover = function (e) {
-  if (e.target.classList.contains('nav__link')) {
-    const link = e.target;
-    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
-    const logo = link.closest('.nav').querySelector('img');
+// const handleHover = function (e) {
+//   if (e.target.classList.contains('nav__link')) {
+//     const link = e.target;
+//     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+//     const logo = link.closest('.nav').querySelector('img');
 
-    siblings.forEach(el => {
-      if (el !== link) el.style.opacity = this;
-    });
-    logo.style.opacity = this;
-  }
+//     siblings.forEach(el => {
+//       if (el !== link) el.style.opacity = this;
+//     });
+//     logo.style.opacity = this;
+//   }
+// };
+// nav.addEventListener('mouseover', handleHover.bind(0.5));
+// nav.addEventListener('mouseout', handleHover.bind(1));
+
+// other solution
+const handleHover = function (o) {
+  return function (e) {
+    if (e.target.classList.contains('nav__link')) {
+      const link = e.target;
+      const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+      const logo = link.closest('.nav').querySelector('img');
+
+      siblings.forEach(el => {
+        if (el !== link) {
+          el.style.opacity = o;
+          console.log(el, link);
+        }
+      });
+      logo.style.opacity = o;
+    }
+  };
 };
-nav.addEventListener('mouseover', handleHover.bind(0.5));
-nav.addEventListener('mouseout', handleHover.bind(1));
 
+// you can log the handleHover(0.1) to see that it returns a function which
+// has access to the argument(opacity value) passed to handleHover() due to closures
+nav.addEventListener('mouseover', handleHover(0.5));
+
+nav.addEventListener('mouseout', handleHover(1));
 /*
 /////////////////// 183. Selecting, Creating, and Deleting Elements ///////////////////
 
