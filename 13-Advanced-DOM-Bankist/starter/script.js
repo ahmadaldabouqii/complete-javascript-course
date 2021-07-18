@@ -142,7 +142,6 @@ const handleHover = function (o) {
       siblings.forEach(el => {
         if (el !== link) {
           el.style.opacity = o;
-          console.log(el, link);
         }
       });
       logo.style.opacity = o;
@@ -155,6 +154,19 @@ const handleHover = function (o) {
 nav.addEventListener('mouseover', handleHover(0.5));
 
 nav.addEventListener('mouseout', handleHover(1));
+
+// sticky navigation
+
+// this is bad for performance, using the scroll event for performing a certain action
+// at a certain position of the page is really not the way to go.
+// that's because the scroll event here fires all the time, no matter how small the change is here in the scroll, thats makes bad performance especially on mobile.
+// on the modern computer you're not gonna notice anything,
+// but if you're using this page maybe on an older smartphone, then it's not gonna be so nice.
+const initialCoords = section1.getBoundingClientRect();
+window.addEventListener('scroll', function () {
+  if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+});
 /*
 /////////////////// 183. Selecting, Creating, and Deleting Elements ///////////////////
 
