@@ -165,8 +165,34 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+const startLogoutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+    // In each call, print the remainig time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    // When 0 Seconds, stop timer and log out user
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'Log in to get Started';
+      containerApp.style.opacity = 0;
+    }
+
+    // Decrese 1 Sec
+    time--;
+  };
+  // Set time to 5 minutes
+  let time = 120;
+
+  // call the timer every second
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
+
 // Event Handler
-let currentAccount;
+let currentAccount, timer;
 
 const now = new Date();
 const options = {
@@ -222,6 +248,10 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
+    //Timer
+    if (timer) clearInterval(timer);
+    timer = startLogoutTimer();
+
     // update UI
     updateUI(currentAccount);
   }
@@ -253,6 +283,10 @@ btnTransfer.addEventListener('click', function (e) {
 
     // update UI
     updateUI(currentAccount);
+
+    // Reset Timer
+    clearInterval(timer);
+    timer = startLogoutTimer();
   }
 });
 
@@ -270,6 +304,10 @@ btnLoan.addEventListener('click', function (e) {
 
       // UpdateUI
       updateUI(currentAccount);
+
+      // Reset Timer
+      clearInterval(timer);
+      timer = startLogoutTimer();
     }, 2500);
   }
 });
@@ -513,9 +551,9 @@ console.log(+future);
 // const days1 = calcdaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14));
 // console.log(days1);
 
-///////////////////////////    175. Internationalizing Dates (Intl)    ///////////////////////////
+///////////////////////////    177. setTimeout and setInterval    ///////////////////////////
 
-*/
+
 // setTimeout: simply schedules a function to run after a certain amount of time
 setTimeout(
   (ing1, ing2) => console.log(`Here is Your Pizza with ${ing1} and ${ing2} 🍕`),
@@ -532,7 +570,7 @@ const pizzaTimer = setTimeout(
 );
 if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);
 
-// setInterval
+// setInterval: keep running forever unteil we stop it
 1;
 setInterval(() => {
   console.log(
@@ -547,3 +585,4 @@ setInterval(() => {
     )
   );
 }, 1000);
+*/

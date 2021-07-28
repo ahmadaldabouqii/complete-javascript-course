@@ -81,10 +81,12 @@ btnScrollTo.addEventListener('click', function (e) {
 //   });
 // });
 
-// 1. Add event listener to common parent element
+// using event delegation:
+// 1. Add event listener to common parent element.
 // 2. Determine what element originated the event.
 document.querySelector('.nav__links').addEventListener('click', function (e) {
   e.preventDefault();
+
   // Mathching strategy
   // if (e.target.matches('.nav__link')) console.log('LINK');
   if (e.target.classList.contains('nav__link')) {
@@ -156,6 +158,7 @@ nav.addEventListener('mouseover', handleHover(0.5));
 nav.addEventListener('mouseout', handleHover(1));
 
 // sticky navigation
+// solution 1
 
 // this is bad for performance, using the scroll event for performing a certain action
 // at a certain position of the page is really not the way to go.
@@ -164,15 +167,24 @@ nav.addEventListener('mouseout', handleHover(1));
 // but if you're using this page maybe on an older smartphone, then it's not gonna be so nice.
 const initialCoords = section1.getBoundingClientRect();
 window.addEventListener('scroll', function () {
+  // window.scrollY: current scroll position(position from the point in the viewport(the point from the top window browser to the top of the page))
   if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
 });
+
+// solution 2
+// using "intersection observer API": this API allows our code to observe changes to the way that a certain target element intersects another element or the way it intersects the viewport.
 /*
 /////////////////// 183. Selecting, Creating, and Deleting Elements ///////////////////
 
 // Selecting elements
+
+console.log(document);
+
+// Return the root node in html dom that is <html>
 console.log(document.documentElement);
-console.log(document.head);
+
+// Return the body node in html dom, namely <body>
 console.log(document.body);
 
 const header = document.querySelector('.header');
