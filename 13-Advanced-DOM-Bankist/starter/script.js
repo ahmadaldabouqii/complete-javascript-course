@@ -107,7 +107,7 @@ tabsContainer.addEventListener('click', e => {
   tabs.forEach(tab => tab.classList.remove('operations__tab--active'));
   tabsContent.forEach(c => c.classList.remove('operations__content--active'));
 
-  // Active tab
+  // Activate tab
   clicked.classList.add('operations__tab--active');
 
   // Activate content area
@@ -133,28 +133,25 @@ tabsContainer.addEventListener('click', e => {
 // nav.addEventListener('mouseover', handleHover.bind(0.5));
 // nav.addEventListener('mouseout', handleHover.bind(1));
 
-// other solution
+// other solution: using clousure
 const handleHover = function (o) {
   return function (e) {
     if (e.target.classList.contains('nav__link')) {
       const link = e.target;
       const siblings = link.closest('.nav').querySelectorAll('.nav__link');
-      const logo = link.closest('.nav').querySelector('img');
 
       siblings.forEach(el => {
         if (el !== link) {
           el.style.opacity = o;
         }
       });
-      logo.style.opacity = o;
     }
   };
 };
 
 // you can log the handleHover(0.1) to see that it returns a function which
-// has access to the argument(opacity value) passed to handleHover() due to closures
+// has access to the argument(opacity value) passed to handleHover() due to closures.
 nav.addEventListener('mouseover', handleHover(0.5));
-
 nav.addEventListener('mouseout', handleHover(1));
 
 // sticky navigation
