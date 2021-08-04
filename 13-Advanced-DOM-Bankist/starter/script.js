@@ -171,11 +171,11 @@ window.addEventListener('scroll', function () {
 
 // solution 2
 // using "intersection observer API": this API allows our code to observe changes to the way that a certain target element intersects another element or the way it intersects the viewport.
-/*
+
 /////////////////// 183. Selecting, Creating, and Deleting Elements ///////////////////
 
 // Selecting elements
-
+/*
 console.log(document);
 
 // Return the root node in html dom that is <html>
@@ -272,7 +272,6 @@ logo.clasName = 'jonas';
 
 // btnScrollTo.addEventListener('click', function (e) {
 //   const s1_coords = section_1.getBoundingClientRect();
-//   console.log(s1_coords);
 //   console.log(e.target.getBoundingClientRect());
 //   console.log('current position (X/Y)', window.pageXOffset, window.pageYOffset);
 //   console.log(
