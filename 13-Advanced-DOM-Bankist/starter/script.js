@@ -42,8 +42,8 @@ document.addEventListener('keydown', function (e) {
 ///////////////////////////////////////
 // Button scrolling
 btnScrollTo.addEventListener('click', function (e) {
-  const s1coords = section1.getBoundingClientRect();
-  console.log(s1coords);
+  // const s1coords = section1.getBoundingClientRect();
+  // console.log(s1coords);
 
   console.log(e.target.getBoundingClientRect());
 
@@ -96,7 +96,6 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 });
 
 // Tabbed Component
-
 tabsContainer.addEventListener('click', e => {
   const clicked = e.target.closest('.operations__tab');
 
@@ -137,14 +136,12 @@ tabsContainer.addEventListener('click', e => {
 const handleHover = function (o) {
   return function (e) {
     if (e.target.classList.contains('nav__link')) {
-      const link = e.target;
-      const siblings = link.closest('.nav').querySelectorAll('.nav__link');
-
-      siblings.forEach(el => {
-        if (el !== link) {
-          el.style.opacity = o;
-        }
-      });
+      e.target
+        .closest('.nav')
+        .querySelectorAll('.nav__link')
+        .forEach(el => {
+          if (el !== e.target) el.style.opacity = o;
+        });
     }
   };
 };
