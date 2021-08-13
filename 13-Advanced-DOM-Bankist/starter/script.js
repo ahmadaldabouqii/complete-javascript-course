@@ -162,8 +162,9 @@ nav.addEventListener('mouseout', handleHover(1));
 const initialCoords = section1.getBoundingClientRect();
 window.addEventListener('scroll', function () {
   // window.scrollY: current scroll position(position from the point in the viewport(the point from the top window browser to the top of the page))
-  if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
-  else nav.classList.remove('sticky');
+  window.scrollY > initialCoords.top
+    ? nav.classList.add('sticky')
+    : nav.classList.remove('sticky');
 });
 
 // solution 2
