@@ -159,17 +159,33 @@ nav.addEventListener('mouseout', handleHover(1));
 // that's because the scroll event here fires all the time, no matter how small the change is here in the scroll, thats makes bad performance especially on mobile.
 // on the modern computer you're not gonna notice anything,
 // but if you're using this page maybe on an older smartphone, then it's not gonna be so nice.
-const initialCoords = section1.getBoundingClientRect();
-window.addEventListener('scroll', function () {
-  // window.scrollY: current scroll position(position from the point in the viewport(the point from the top window browser to the top of the page))
-  window.scrollY > initialCoords.top
-    ? nav.classList.add('sticky')
-    : nav.classList.remove('sticky');
-});
+// const initialCoords = section1.getBoundingClientRect();
+// window.addEventListener('scroll', function () {
+//   // window.scrollY: current scroll position(position from the point in the viewport(the point from the top window browser to the top of the page))
+//   window.scrollY > initialCoords.top
+//     ? nav.classList.add('sticky')
+//     : nav.classList.remove('sticky');
+// });
 
 // solution 2
 // using "intersection observer API": this API allows our code to observe changes to the way that a certain target element intersects another element or the way it intersects the viewport.
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+console.log(navHeight);
 
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  console.log(entry);
+  if (!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+});
+headerObserver.observe(header);
 /////////////////// 183. Selecting, Creating, and Deleting Elements ///////////////////
 
 // Selecting elements
