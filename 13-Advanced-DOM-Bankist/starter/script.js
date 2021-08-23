@@ -171,11 +171,10 @@ nav.addEventListener('mouseout', handleHover(1));
 // using "intersection observer API": this API allows our code to observe changes to the way that a certain target element intersects another element or the way it intersects the viewport.
 const header = document.querySelector('.header');
 const navHeight = nav.getBoundingClientRect().height;
-console.log(navHeight);
 
 const stickyNav = function (entries) {
   const [entry] = entries;
-  console.log(entry);
+  // console.log(entry);
   if (!entry.isIntersecting) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
 };
@@ -186,6 +185,25 @@ const headerObserver = new IntersectionObserver(stickyNav, {
   rootMargin: `-${navHeight}px`,
 });
 headerObserver.observe(header);
+
+// Reveal sections
+const allSections = document.querySelectorAll('.section');
+const revealSections = function (entries, observer) {
+  if (!entries[0].isIntersecting) return;
+  entries[0].target.classList.remove('section--hidden');
+  observer.unobserve(entries[0].target);
+};
+
+const sectionsObserver = new IntersectionObserver(revealSections, {
+  root: null,
+  threshold: 0.12,
+});
+
+allSections.forEach(section => {
+  sectionsObserver.observe(section);
+  section.classList.add('section--hidden');
+});
+
 /////////////////// 183. Selecting, Creating, and Deleting Elements ///////////////////
 
 // Selecting elements
