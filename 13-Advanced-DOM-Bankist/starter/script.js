@@ -42,7 +42,7 @@ document.addEventListener('keydown', function (e) {
 ///////////////////////////////////////
 // Button scrolling
 btnScrollTo.addEventListener('click', function (e) {
-  // const s1coords = section1.getBoundingClientRect();
+  const s1coords = section1.getBoundingClientRect();
   // console.log(s1coords);
 
   console.log(e.target.getBoundingClientRect());
@@ -67,7 +67,9 @@ btnScrollTo.addEventListener('click', function (e) {
   //   behavior: 'smooth',
   // });
 
-  section1.scrollIntoView({ behavior: 'smooth' });
+  section1.scrollIntoView({
+    behavior: 'smooth',
+  });
 });
 
 ///////////////////////////////////////
@@ -196,7 +198,7 @@ const revealSections = function (entries, observer) {
 
 const sectionsObserver = new IntersectionObserver(revealSections, {
   root: null,
-  threshold: 0.12,
+  threshold: 0.11,
 });
 
 allSections.forEach(section => {
@@ -204,6 +206,24 @@ allSections.forEach(section => {
   section.classList.add('section--hidden');
 });
 
+// Lazy loading images
+const imgTargets = document.querySelectorAll('img[data-src]');
+
+const loadImg = function (entries, observer) {
+  // console.log(entries[0]);
+
+  if (!entries[0].isIntersecting) return;
+
+  // Replace src with data-src
+  entries[0].target.src = entries[0].target.dataset.src;
+  entries[0].target.addEventListener('load', function () {});
+};
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+});
+
+imgTargets.forEach(img => imgObserver.observe(img));
 /////////////////// 183. Selecting, Creating, and Deleting Elements ///////////////////
 
 // Selecting elements
@@ -235,6 +255,8 @@ message.innerHTML =
 
 // header.prepend(message);
 header.append(message);
+
+// if we want to be this message in multiple places
 // header.append(message.cloneNode(true));
 
 // header.before(message);
@@ -290,8 +312,8 @@ console.log(link.getAttribute('href'));
 console.log(logo.dataset.versionNumber);
 
 // Classes
-logo.classList.add('c', 'j');
-logo.classList.remove('c', 'j');
+logo.classList.add('c1', 'c2');
+logo.classList.remove('c1', 'c2');
 logo.classList.toggle('c');
 logo.classList.contains('c'); // not includes
 

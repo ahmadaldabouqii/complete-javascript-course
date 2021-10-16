@@ -43,3 +43,11 @@ document.querySelector('.again').addEventListener('click', function () {
   document.querySelector('.guess').value = '';
   document.querySelector('.number').style.width = '15rem';
 });
+
+const btn_click = document.querySelector('.check');
+
+btn_click.addEventListener('click', function (e) {
+  document.body.style.background = 'red';
+  btn_click.style.fontSize = '1em';
+  console.log(e);
+});
