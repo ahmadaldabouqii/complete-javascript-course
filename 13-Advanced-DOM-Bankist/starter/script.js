@@ -391,6 +391,7 @@ document.querySelector('.nav').addEventListener('click', function (e) {
 });
 
 /////////////////// 190. DOM Traversing ///////////////////
+//DOM Traversing: is walking through the DOM, which means we can select an elemt based on another element.
 
 const h1 = document.querySelector('h1');
 
