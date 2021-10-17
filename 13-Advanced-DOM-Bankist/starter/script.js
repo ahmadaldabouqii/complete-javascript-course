@@ -161,10 +161,11 @@ nav.addEventListener('mouseout', handleHover(1));
 // that's because the scroll event here fires all the time, no matter how small the change is here in the scroll, thats makes bad performance especially on mobile.
 // on the modern computer you're not gonna notice anything,
 // but if you're using this page maybe on an older smartphone, then it's not gonna be so nice.
-// const initialCoords = section1.getBoundingClientRect();
+
+// const section1_Coords = section1.getBoundingClientRect();
 // window.addEventListener('scroll', function () {
 //   // window.scrollY: current scroll position(position from the point in the viewport(the point from the top window browser to the top of the page))
-//   window.scrollY > initialCoords.top
+//   window.scrollY > section1_Coords.top
 //     ? nav.classList.add('sticky')
 //     : nav.classList.remove('sticky');
 // });
@@ -176,14 +177,15 @@ const navHeight = nav.getBoundingClientRect().height;
 
 const stickyNav = function (entries) {
   const [entry] = entries;
-  // console.log(entry);
-  if (!entry.isIntersecting) nav.classList.add('sticky');
-  else nav.classList.remove('sticky');
+  console.log(entry);
+  !entry.isIntersecting
+    ? nav.classList.add('sticky')
+    : nav.classList.remove('sticky');
 };
 
 const headerObserver = new IntersectionObserver(stickyNav, {
   root: null,
-  threshold: 0,
+  threshold: 0, // When one pixel of section1 is visible
   rootMargin: `-${navHeight}px`,
 });
 headerObserver.observe(header);
