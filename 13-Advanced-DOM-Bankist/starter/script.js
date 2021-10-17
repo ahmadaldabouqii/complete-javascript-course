@@ -101,7 +101,7 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 tabsContainer.addEventListener('click', e => {
   const clicked = e.target.closest('.operations__tab');
 
-  // Guard Clause
+  // Guard Clause(when there is nothing clicked, finish function immediatly)
   if (!clicked) return;
 
   // Remove Active Classes
@@ -391,7 +391,7 @@ document.querySelector('.nav').addEventListener('click', function (e) {
 });
 
 /////////////////// 190. DOM Traversing ///////////////////
-//DOM Traversing: is walking through the DOM, which means we can select an elemt based on another element.
+//DOM Traversing: is walking through the DOM, which means we can select an element based on another element.
 
 const h1 = document.querySelector('h1');
 
