@@ -177,7 +177,6 @@ const navHeight = nav.getBoundingClientRect().height;
 
 const stickyNav = function (entries) {
   const [entry] = entries;
-  console.log(entry);
   !entry.isIntersecting
     ? nav.classList.add('sticky')
     : nav.classList.remove('sticky');
@@ -212,20 +211,26 @@ allSections.forEach(section => {
 const imgTargets = document.querySelectorAll('img[data-src]');
 
 const loadImg = function (entries, observer) {
-  // console.log(entries[0]);
-
-  if (!entries[0].isIntersecting) return;
+  const [entry] = entries;
+  if (!entry.isIntersecting) return;
 
   // Replace src with data-src
-  entries[0].target.src = entries[0].target.dataset.src;
-  entries[0].target.addEventListener('load', function () {});
+  entry.target.src = entry.target.dataset.src;
+
+  entry.target.addEventListener('load', () =>
+    entry.target.classList.remove('lazy-img')
+  );
+
+  observer.unobserve(entry.target);
 };
 const imgObserver = new IntersectionObserver(loadImg, {
   root: null,
   threshold: 0,
+  rootMargin: '200px',
 });
 
 imgTargets.forEach(img => imgObserver.observe(img));
+
 /////////////////// 183. Selecting, Creating, and Deleting Elements ///////////////////
 
 // Selecting elements

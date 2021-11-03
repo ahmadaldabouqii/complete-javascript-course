@@ -225,9 +225,8 @@ btnSort.addEventListener('click', function (e) {
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-/*
 /////////////////////////////////////////////////   141. Simple Array Methods   /////////////////////////////////////////////////
-
+/*
 let arr = ['a', 'b', 'c', 'd', 'e'];
 
 // SLICE METHOD
@@ -243,10 +242,10 @@ let arr = ['a', 'b', 'c', 'd', 'e'];
 // SPLICE
 
 // console.log(arr.splice(2));
-arr.splice(-1);
-console.log(arr);
-arr.splice(1, 2);
-console.log(arr);
+// arr.splice(-1);
+// console.log(arr);
+// arr.splice(1, 2);
+// console.log(arr);
 
 // REVERSE
 arr = ['a', 'b', 'c', 'd', 'e'];
@@ -262,7 +261,8 @@ console.log([...arr, ...arr2]);
 // JOIN
 console.log(letters.join('-'));
 
-
+*/
+/*
 /////////////////////////////////////////////////   142. Looping Arrays: forEach   /////////////////////////////////////////////////
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -289,7 +289,7 @@ movements.forEach(function (mov, i, arr) {
 // 2: function(400)
 // ...
 
-
+*/
 /////////////////////////////////////////////////   143. forEach With Maps and Sets   /////////////////////////////////////////////////
 
 // Map
@@ -311,11 +311,11 @@ currenciesUnique.forEach(function (value, _, set) {
   console.log(`${value}: ${value}`);
 });
 
-
+/*
 /////////////////////////////////////////////////   Coding Challenge #1   /////////////////////////////////////////////////
 
 // a shallow copy is a copy in which if we make any changes
-// then in the original also the changes will get reflected,usually in case of objects.
+// then in the original also the changes will get reflected, usually in case of objects.
 
 const checkDogs = function (dogsJulia, dogsKate) {
   const CatsJulia = dogsJulia.slice(1, -2);
