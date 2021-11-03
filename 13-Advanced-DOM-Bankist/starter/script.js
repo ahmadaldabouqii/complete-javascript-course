@@ -204,7 +204,7 @@ const sectionsObserver = new IntersectionObserver(revealSections, {
 
 allSections.forEach(section => {
   sectionsObserver.observe(section);
-  section.classList.add('section--hidden');
+  // section.classList.add('section--hidden');
 });
 
 // Lazy loading images
@@ -223,13 +223,42 @@ const loadImg = function (entries, observer) {
 
   observer.unobserve(entry.target);
 };
+
 const imgObserver = new IntersectionObserver(loadImg, {
   root: null,
   threshold: 0,
   rootMargin: '200px',
 });
-
 imgTargets.forEach(img => imgObserver.observe(img));
+
+// Slider
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+
+let currentSlide = 0;
+const slidesLength = slides.length;
+
+const goToSlide = slide => {
+  slides.forEach((s, index) => {
+    s.style.transform = `translateX(${100 * (index - slide)}%)`;
+  });
+};
+
+goToSlide(0);
+
+const nextSlide = () => {
+  currentSlide === slidesLength - 1 ? (currentSlide = 0) : currentSlide++;
+  goToSlide(currentSlide);
+};
+
+const prevSlide = () => {
+  currentSlide === 0 ? (currentSlide = slidesLength - 1) : currentSlide--;
+  goToSlide(currentSlide);
+};
+
+btnRight.addEventListener('click', nextSlide);
+btnLeft.addEventListener('click', prevSlide);
 
 /////////////////// 183. Selecting, Creating, and Deleting Elements ///////////////////
 
