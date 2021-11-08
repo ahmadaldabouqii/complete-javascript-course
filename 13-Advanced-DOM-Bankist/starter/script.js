@@ -304,6 +304,7 @@ const slider = function () {
   });
 };
 slider();
+
 /////////////////// 183. Selecting, Creating, and Deleting Elements ///////////////////
 
 // Selecting elements
