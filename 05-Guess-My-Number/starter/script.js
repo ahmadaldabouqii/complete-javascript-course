@@ -49,5 +49,4 @@ const btn_click = document.querySelector('.check');
 btn_click.addEventListener('click', function (e) {
   document.body.style.background = 'red';
   btn_click.style.fontSize = '1em';
-  console.log(e);
 });
