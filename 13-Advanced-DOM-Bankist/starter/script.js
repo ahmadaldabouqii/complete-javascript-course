@@ -119,34 +119,34 @@ tabsContainer.addEventListener('click', e => {
 
 // Menu fade animation
 
-// const handleHover = function (e) {
-//   if (e.target.classList.contains('nav__link')) {
-//     const link = e.target;
-//     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
-//     const logo = link.closest('.nav').querySelector('img');
+const handleHover = function (e) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
 
-//     siblings.forEach(el => {
-//       if (el !== link) el.style.opacity = this;
-//     });
-//     logo.style.opacity = this;
-//   }
-// };
-// nav.addEventListener('mouseover', handleHover.bind(0.5));
-// nav.addEventListener('mouseout', handleHover.bind(1));
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = this;
+    });
+    logo.style.opacity = this;
+  }
+};
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+nav.addEventListener('mouseout', handleHover.bind(1));
 
 // other solution: using clousure
-const handleHover = function (o) {
-  return function (e) {
-    if (e.target.classList.contains('nav__link')) {
-      e.target
-        .closest('.nav')
-        .querySelectorAll('.nav__link')
-        .forEach(el => {
-          if (el !== e.target) el.style.opacity = o;
-        });
-    }
-  };
-};
+// const handleHover = function (o) {
+//   return function (e) {
+//     if (e.target.classList.contains('nav__link')) {
+//       e.target
+//         .closest('.nav')
+//         .querySelectorAll('.nav__link')
+//         .forEach(el => {
+//           if (el !== e.target) el.style.opacity = o;
+//         });
+//     }
+//   };
+// };
 
 // you can log the handleHover(0.1) to see that it returns a function which
 // has access to the argument(opacity value) passed to handleHover() due to closures.
